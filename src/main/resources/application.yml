@@ -1,0 +1,7 @@
+employee-service:
+   filter:
+     resource:
+       properties:
+         EMPLOYED: true
+         UNEMPLOYED: false
+         SELF_EMPLOYED: true
