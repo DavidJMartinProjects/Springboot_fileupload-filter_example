@@ -3,9 +3,7 @@ package com.microservice.web;
 import static com.microservice.web.test_utilities.Constants.$_EMPLOYED;
 import static com.microservice.web.test_utilities.Constants.$_SELF_EMPLOYED;
 import static com.microservice.web.test_utilities.Constants.$_UNEMPLOYED;
-import static com.microservice.web.test_utilities.Constants.EMPLOYED;
 import static com.microservice.web.test_utilities.Constants.FILTER_RULES;
-import static com.microservice.web.test_utilities.Constants.SELF_EMPLOYED;
 import static com.microservice.web.test_utilities.Constants.WELCOME_MSG;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertTrue;
@@ -43,7 +41,7 @@ public class WebControllerTest {
 	}
 	
 	@Test
-	public void verifyGetRequestToFilterRulesReturnsExpectedResponseFields() throws Exception {
+	public void givenGetRequestToFilterRules_ThenVerifyThatExpectedResponseFieldsAreReturned() throws Exception {
 		ResultActions actualResponse = this.mockMvc.perform(get(FILTER_RULES));
 		actualResponse
 			.andExpect(jsonPath($_EMPLOYED).exists())
@@ -52,20 +50,12 @@ public class WebControllerTest {
 	}
 	
 	@Test
-	public void verifyGetRequestToFilterRulesReturnsExpectedResponseValues() throws Exception {
+	public void givenGetRequestToFilterRules_ThenVerifyThatExpectedResponseValuesAreReturned() throws Exception {
 		ResultActions actualResponse = this.mockMvc.perform(get(FILTER_RULES));
 		actualResponse
 			.andExpect(jsonPath($_EMPLOYED, is(true)))
 			.andExpect(jsonPath($_UNEMPLOYED, is(false)))
 			.andExpect(jsonPath($_SELF_EMPLOYED, is(true)));
-	}
-	
-	@Test
-	public void givenValidGetRequest_ThenAssertThatExpectedFilteredPropertiesAreReturned() throws Exception {
-		MvcResult response = this.mockMvc.perform(get(FILTER_RULES)).andReturn();
-		String responseBody = response.getResponse().getContentAsString();
-		assertTrue(responseBody.contains(EMPLOYED));
-		assertTrue(responseBody.contains(SELF_EMPLOYED));		
 	}
 
 }

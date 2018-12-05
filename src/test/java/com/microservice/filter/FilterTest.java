@@ -27,11 +27,11 @@ public class FilterTest {
 	@Autowired
 	Filter filter;
 	
-	Map<String, Boolean> expectedProperties = new HashMap<>();
-	List<Employee> unfilteredEmpList = new ArrayList<>();
-	Employee emp1;
-	Employee emp2;
-	Employee emp3;
+	private Map<String, Boolean> expectedProperties = new HashMap<>();
+	private List<Employee> unfilteredEmpList = new ArrayList<>();
+	private Employee emp1;
+	private Employee emp2;
+	private Employee emp3;
 	
 	@Before
 	public void setUp() {
@@ -44,19 +44,19 @@ public class FilterTest {
 	}
 
 	@Test
-	public void verifyApplyFilterIsFilteringAsExpected() {
+	public void givenListOfEmployess_WhenTheFilterIsApplied_ThenTheExpectedEmployeesAreReturned() {
 		List<Employee> filteredEmployees = filter.applyFilter(unfilteredEmpList);
 		assertEquals(2, filteredEmployees.size());
 	}
 	
 	@Test
-	public void verifyIsVisibleIsFilteringUnemployedPeopleAsExpected() throws Exception {
+	public void givenAnEmployee_WhenIsVisibleMethodIsCalled_ThenTheExpectedResultIsReturned() throws Exception {
 		boolean expectedResult = false;
 		assertEquals(expectedResult, filter.isVisible(emp1));
 	}
 	
 	@Test
-	public void verifyGetFilterRulesReturnedTheExpectedCollection() throws Exception {
+	public void whenFilterPropertiesAreInitialised_ThenTheExpectedResultIsReturned() throws Exception {
 		initialiseExpectedProperties();
 		assertEquals(expectedProperties, filter.getFilterRules());
 	}
