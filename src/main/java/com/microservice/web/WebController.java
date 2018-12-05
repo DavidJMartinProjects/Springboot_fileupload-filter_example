@@ -19,6 +19,8 @@ import com.microservice.filter.FilterRules;
 @RestController
 public class WebController {
 	
+	private static final String WELCOME_MSG = "Welcome to Employee Onboarding Service.";
+
 	@Autowired
 	EmployeeUploadService employeeUploadService;
 	
@@ -27,7 +29,7 @@ public class WebController {
 	
 	@GetMapping("/")
 	public String greeting() {
-		return "Welcome to Employee Onboarding Service.";
+		return WELCOME_MSG;
 	}
 	
 	@RequestMapping(value = "/filter-rules", method = RequestMethod.GET, produces = { "application/json" })
@@ -36,7 +38,7 @@ public class WebController {
 	}
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = { "multipart/form-data" }, produces = { "application/json" })
-	public ResponseEntity<Object> createEmployees(@RequestParam("file") final MultipartFile file) {
+	public ResponseEntity<Object> createEmployees(@RequestParam("file") final MultipartFile file) {		
 		List<Employee> empList = employeeUploadService.convertCsvToFilteredEmployeeList(file);
 		return new ResponseEntity<>(empList, HttpStatus.OK);
 	}
